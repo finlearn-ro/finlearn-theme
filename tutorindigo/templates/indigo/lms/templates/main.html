@@ -195,41 +195,6 @@ from common.djangoapps.pipeline_mako import render_require_js_path_overrides
 <body class="${static.dir_rtl()} <%block name='bodyclass'/> lang_${LANGUAGE_CODE}">
 
 
-<script type="module">
-    import Keycloak  from '/static/indigo/js/keycloak.js';
-    const isAuthenticated = ${str(user.is_authenticated).lower()}
-    
-    function initKeycloak() {
-        const keycloak = new Keycloak({
-            clientId: 'openedx',
-            realm: "prod",
-            url: "https://auth.finlearn.ro",
-        });
-        keycloak.init({
-            onLoad: "check-sso",
-            silentCheckSsoRedirectUri:
-                window.location.origin + "/static/indigo/js/_silent-check-sso.html",
-            flow: "implicit",
-        }).then(function(authenticated) {
-            if (authenticated && !isAuthenticated) {
-            const params = (new URL(document.location)).searchParams;
-            const next = params.get('next') || '/'
-            window.location.href = '/auth/login/keycloak/?auth_entry=login&next=' + encodeURIComponent(next)
-            } else if (!authenticated && isAuthenticated) {
-            // force logout
-            const next = window.location.pathname + window.location.search
-            window.location.href = '/logout?next=' + encodeURIComponent(next)
-            }
-        }).catch(function() {
-            alert('failed to initialize');
-        });
-    }
-    // in logout page, we handle in different way
-    if (!window.location.pathname.startsWith('/logout')) {
-        initKeycloak()
-    }
-    </script>
-
 <%static:optional_include_mako file="body-initial.html" is_theming_enabled="True" />
 <div id="page-prompt"></div>
 % if not disable_window_wrap:

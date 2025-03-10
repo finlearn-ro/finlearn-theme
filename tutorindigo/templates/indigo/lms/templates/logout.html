@@ -46,41 +46,23 @@
         <script type="text/javascript" src="{% static 'js/jquery.allLoaded.js' %}"></script>
         {% comment %} <script type="text/javascript" src="{% static 'js/logout.js' %}"></script> {% endcomment %}
 
-        <div style="display: none;" id="authenticated-status" data-authenticated="{{ user.is_authenticated|lower }}"> </div>        <script>
+        <div style="display: none;" id="authenticated-status" data-authenticated="{{ user.is_authenticated|lower }}"> </div>
+        <script>
             import Keycloak from '/static/indigo/js/keycloak.js';
             
             const isAuthenticated = document.getElementById('authenticated-status').getAttribute('data-authenticated') === 'true';
             
-            function initKeycloak() {
-                const keycloak = new Keycloak({
-                    clientId: 'openedx',
-                    realm: "prod",
-                    url: "https://auth.finlearn.ro",
-                });
-                keycloak.init({
-                    onLoad: "check-sso",
-                    silentCheckSsoRedirectUri:
-                        window.location.origin + "/static/indigo/js/_silent-check-sso.html",
-                    flow: "implicit",
-                }).then(function(authenticated) {
-                  if (authenticated && !isAuthenticated) {
-                    const params = (new URL(document.location)).searchParams;
-                    const next = params.get('next') || '/'
-                    window.location.href = '/auth/login/keycloak/?auth_entry=login&next=' + encodeURIComponent(next)
-                  } else if (!authenticated && isAuthenticated) {
-                    // force logout
-                    const next = window.location.pathname + window.location.search
-                    window.location.href = '/logout?next=' + encodeURIComponent(next)
-                  }
-                }).catch(function() {
-                    alert('failed to initialize');
-                });
-            }
-            // in logout page, we handle in different way
-            if (!window.location.pathname.startsWith('/logout')) {
-              initKeycloak()
-            }
-          </script>
+            const keycloak = new Keycloak({
+                clientId: 'openedx',
+                realm: "prod",
+                url: "https://auth.finlearn.ro",
+            });
+
+            keycloak.logout({
+                redirectUri: window.location.origin + '/logout',
+            });
+
+        </script>
     {% endif %}
 
     <div id="iframeContainer" style="visibility: hidden" data-redirect-url="{{ target }}">
