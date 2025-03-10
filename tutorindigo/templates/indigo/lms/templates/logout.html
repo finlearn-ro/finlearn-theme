@@ -47,7 +47,7 @@
         {% comment %} <script type="text/javascript" src="{% static 'js/logout.js' %}"></script> {% endcomment %}
 
         <div style="display: none;" id="authenticated-status" data-authenticated="{{ user.is_authenticated|lower }}"> </div>
-        <script>
+        <script type="module">
             import Keycloak from '/static/indigo/js/keycloak.js';
             
             const isAuthenticated = document.getElementById('authenticated-status').getAttribute('data-authenticated') === 'true';
