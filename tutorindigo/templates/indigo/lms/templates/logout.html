@@ -48,7 +48,7 @@
 
         <div style="display: none;" id="authenticated-status" data-authenticated="{{ str(user.is_authenticated).lower() }}"> </div>
         <script>
-            import { Keycloak } from '/static/indigo/js/keycloak.js';
+            import Keycloak from '/static/indigo/js/keycloak.js';
             
             const isAuthenticated = document.getElementById('authenticated-status').getAttribute('data-authenticated') === 'true';
             
