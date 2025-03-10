@@ -46,9 +46,11 @@
         <script type="text/javascript" src="{% static 'js/jquery.allLoaded.js' %}"></script>
         {% comment %} <script type="text/javascript" src="{% static 'js/logout.js' %}"></script> {% endcomment %}
 
-        <script type="module" src="/static/indigo/js/keycloak.js"></script>
+        <div style="display: none;" id="authenticated-status" data-authenticated="{{ str(user.is_authenticated).lower() }}"> </div>
         <script>
-            const isAuthenticated = ${str(user.is_authenticated).lower()}
+            import { Keycloak } from '/static/indigo/js/keycloak.js';
+            
+            const isAuthenticated = document.getElementById('authenticated-status').getAttribute('data-authenticated') === 'true';
             
             function initKeycloak() {
                 const keycloak = new Keycloak({

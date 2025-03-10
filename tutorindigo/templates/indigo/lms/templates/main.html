@@ -194,8 +194,9 @@ from common.djangoapps.pipeline_mako import render_require_js_path_overrides
 
 <body class="${static.dir_rtl()} <%block name='bodyclass'/> lang_${LANGUAGE_CODE}">
 
-<script type="module" src="/static/indigo/js/keycloak.js"></script>
-<script>
+
+<script type="module">
+    import { Keycloak } from '/static/indigo/js/keycloak.js';
     const isAuthenticated = ${str(user.is_authenticated).lower()}
     
     function initKeycloak() {
