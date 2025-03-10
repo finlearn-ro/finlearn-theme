@@ -46,7 +46,7 @@
         <script type="text/javascript" src="{% static 'js/jquery.allLoaded.js' %}"></script>
         {% comment %} <script type="text/javascript" src="{% static 'js/logout.js' %}"></script> {% endcomment %}
 
-        <script type="text/javascript" src="/static/indigo/js/keycloak.js"></script>
+        <script type="module" src="/static/indigo/js/keycloak.js"></script>
         <script>
             const isAuthenticated = ${str(user.is_authenticated).lower()}
             
