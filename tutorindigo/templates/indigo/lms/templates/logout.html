@@ -46,7 +46,7 @@
         <script type="text/javascript" src="{% static 'js/jquery.allLoaded.js' %}"></script>
         {% comment %} <script type="text/javascript" src="{% static 'js/logout.js' %}"></script> {% endcomment %}
 
-        <script type="text/javascript" src="{% static 'js/keycloak.js' %}"></script>
+        <script type="text/javascript" src="/static/indigo/js/keycloak.js"></script>
         <script>
             const isAuthenticated = ${str(user.is_authenticated).lower()}
             
@@ -59,7 +59,7 @@
                 keycloak.init({
                     onLoad: "check-sso",
                     silentCheckSsoRedirectUri:
-                        window.location.origin + "/static/_silent-check-sso.html",
+                        window.location.origin + "/static/indigo/js/_silent-check-sso.html",
                     flow: "implicit",
                 }).then(function(authenticated) {
                   if (authenticated && !isAuthenticated) {
