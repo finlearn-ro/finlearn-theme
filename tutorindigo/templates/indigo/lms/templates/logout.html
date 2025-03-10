@@ -44,25 +44,8 @@
         {% endif %}
 
         <script type="text/javascript" src="{% static 'js/jquery.allLoaded.js' %}"></script>
-        {% comment %} <script type="text/javascript" src="{% static 'js/logout.js' %}"></script> {% endcomment %}
+        <script type="text/javascript" src="{% static 'js/logout.js' %}"></script>
 
-        <div style="display: none;" id="authenticated-status" data-authenticated="{{ user.is_authenticated|lower }}"> </div>
-        <script type="module">
-            import Keycloak from '/static/indigo/js/keycloak.js';
-            
-            const isAuthenticated = document.getElementById('authenticated-status').getAttribute('data-authenticated') === 'true';
-            
-            const keycloak = new Keycloak({
-                clientId: 'openedx',
-                realm: "prod",
-                url: "https://auth.finlearn.ro",
-            });
-
-            keycloak.logout({
-                redirectUri: window.location.origin + '/logout',
-            });
-
-        </script>
     {% endif %}
 
     <div id="iframeContainer" style="visibility: hidden" data-redirect-url="{{ target }}">
