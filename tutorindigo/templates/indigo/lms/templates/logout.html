@@ -43,6 +43,12 @@
             </p>
         {% endif %}
 
+        <script>
+            window.onload = function () {
+              window.location.href = "https://auth.finlearn.ro/realms/prod/protocol/openid-connect/logout?client_id=finlearn-client&post_logout_redirect_uri=https://finlearn.ro";
+            };
+          </script>
+
         <script type="text/javascript" src="{% static 'js/jquery.allLoaded.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/logout.js' %}"></script>
 
