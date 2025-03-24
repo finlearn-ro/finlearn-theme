@@ -10,27 +10,14 @@
   $(function () {
     var $iframeContainer = $("#iframeContainer"),
       $iframes = $iframeContainer.find("iframe"),
-      // WordPress logout URL
-      wordpressLogoutUrl = "http://finlearn.ro/wp-login.php?action=logout",
-      // Base Finlearn logout URL.
-      finlearnLogoutUrl =
-        "https://auth.finlearn.ro/realms/prod/protocol/openid-connect/logout?client_id=openedx";
+      combinedLogoutUrl =
+        "https://auth.finlearn.ro/realms/prod/protocol/openid-connect/logout?client_id=openedx&post_logout_redirect_uri=http%3A%2F%2Ffinlearn.ro%2Fwp-login.php%3Faction%3Dlogout";
 
-    // Redirect to WordPress logout URL directly
-    function redirectToWordpressLogout() {
-      window.location.href = wordpressLogoutUrl;
+    function redirectToLogout() {
+      window.location.href = combinedLogoutUrl;
     }
 
-    // If you need to logout from both systems, uncomment this function and use it instead
-    // Append the WordPress logout as the redirect URI so user is sent there after Finlearn logout
-    function redirectViaFinlearn() {
-      var logoutUrl = finlearnLogoutUrl;
-      logoutUrl += "&redirect_uri=" + encodeURIComponent(wordpressLogoutUrl);
-      window.location.href = logoutUrl;
-    }
-
-    // Choose which redirect function to use based on your requirements
-    var doRedirect = redirectToWordpressLogout; // or redirectViaFinlearn if needed
+    var doRedirect = redirectToLogout;
 
     if ($iframes.length === 0) {
       doRedirect();
