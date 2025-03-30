@@ -33,8 +33,8 @@ should_show_order_history = not enterprise_customer_portal
         <span data-hj-suppress class="username">${displayname}</span>
     </div>
     <div class="dropdown-user-menu hidden" aria-label=${_("More Options")} role="menu" id="user-menu" tabindex="-1">
-        <div class="mobile-nav-item dropdown-item dropdown-nav-item"><a href="${reverse('dashboard')}" role="menuitem">${_("Dashboard")}</a></div>
-        <div class="mobile-nav-item dropdown-item dropdown-nav-item"><a href="https://finlearn.ro/my-account/" role="menuitem">${_("Account")}</a></div>
-        <div class="mobile-nav-item dropdown-item dropdown-nav-item"><a href="https://finlearn.ro/my-account/orders/" role="menuitem">${_("Order History")}</a></div>
+        <div class="mobile-nav-item dropdown-item dropdown-nav-item"><a href="${reverse('dashboard') | h}" role="menuitem">${_("Dashboard")}</a></div>
+        <div class="mobile-nav-item dropdown-item dropdown-nav-item"><a href="${'https://finlearn.ro/my-account/' | h}" role="menuitem">${_("Account")}</a></div>
+        <div class="mobile-nav-item dropdown-item dropdown-nav-item"><a href="${'https://finlearn.ro/my-account/orders/' | h}" role="menuitem">${_("Order History")}</a></div>
     </div>
 </div>
