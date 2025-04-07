@@ -28,10 +28,8 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         # To remove all links, run:
         # tutor config save --set INDIGO_FOOTER_NAV_LINKS=[]
         "FOOTER_NAV_LINKS": [
-            {"title": "About Us", "url": "/about"},
-            {"title": "Terms of Service", "url": "/tos"},
-            {"title": "Privacy Policy", "url": "/privacy"},
-            {"title": "Contact Us", "url": "/contact"},
+            {"title": "Terms of Service", "url": "https://finlearn.ro/termeni-si-conditii/"},
+            {"title": "Privacy Policy", "url": "https://finlearn.ro/politica-de-confidentialitate/"},
         ],
     },
     "unique": {},

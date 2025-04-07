@@ -12,6 +12,9 @@
 <%namespace name='static' file='../static_content.html'/>
 <%block name="js_extra">
   <script type="text/javascript" src="${static.url('common/js/vendor/bootstrap.bundle.js')}"></script>
+  <script type="text/javascript">
+    window.location.href = "${'https://finlearn.ro/cursuri/' | n, js_escaped_string}";
+  </script>
 </%block>
 % if course_discovery_enabled:
 <%block name="header_extras">
