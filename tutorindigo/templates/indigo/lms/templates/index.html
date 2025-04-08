@@ -8,6 +8,8 @@ from django.urls import reverse
 from openedx.core.djangolib.markup import HTML, Text
 %>
 
+<script type="text/javascript" src="${static.url('indigo/js/redirect.js')}"></script>
+
 <main id="main" aria-label="Content" tabindex="-1">
     <section class="home style-logout">
       <header>
@@ -68,8 +70,6 @@ from openedx.core.djangolib.markup import HTML, Text
          }
       })
    </script>
-
-   <script type="text/javascript" src="${static.url('indigo/js/redirect.js')}"></script>
 </%block>
 
 % if show_signup_immediately is not UNDEFINED:

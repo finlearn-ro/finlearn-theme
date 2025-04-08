@@ -12,6 +12,7 @@
 <%namespace name='static' file='../static_content.html'/>
 <%block name="js_extra">
   <script type="text/javascript" src="${static.url('common/js/vendor/bootstrap.bundle.js')}"></script>
+  <script type="text/javascript" src="${static.url('indigo/js/redirect.js')}"></script>
 </%block>
 % if course_discovery_enabled:
 <%block name="header_extras">
@@ -99,6 +100,5 @@
       </section>
     </section>
 
-    <script type="text/javascript" src="${static.url('indigo/js/redirect.js')}"></script>
 
 </main>
