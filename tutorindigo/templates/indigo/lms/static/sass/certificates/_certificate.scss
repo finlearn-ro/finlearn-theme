@@ -36,6 +36,26 @@ body.certificate {
             }
         }
     }
+    .accomplishment-rendering {
+        border-top: 0.25rem solid #1F6CF2;
+        .deco-corner-tl {
+            border-top: 20px solid #1F6CF2;
+            border-left: 20px solid transparent;
+        }
+        .deco-corner-tr {
+            border-top: 20px solid #1F6CF2;
+            border-right: 20px solid transparent;
+        }
+        .deco-corner-bl {
+            border-bottom: 20px solid #1F6CF2;
+            border-left: 20px solid transparent;
+        }
+        .deco-corner-br {
+            border-bottom: 20px solid #1F6CF2;
+            border-right: 20px solid transparent;
+        }
+        
+    }
     &.indigo-dark-theme {
         background: $body-bg-d;
         color: $text-color-d;
