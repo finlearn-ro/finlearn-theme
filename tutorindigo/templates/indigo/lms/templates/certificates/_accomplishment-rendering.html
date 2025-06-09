@@ -6,88 +6,75 @@ course_mode_class = course_mode if course_mode else ''
 %>
 
 <main class="accomplishment accomplishment-main">
-
-    <div class="wrapper-accomplishment-rendering">
+      <div class="wrapper-accomplishment-rendering">
         <div class="accomplishment-rendering">
-            <span class="deco-corner deco-corner-tl"></span>
-            <span class="deco-corner deco-corner-tr"></span>
-            <span class="deco-corner deco-corner-bl"></span>
-            <span class="deco-corner deco-corner-br"></span>
+          <div class="certificate">
+            <!-- Watermark -->
+            <div class="watermark"></div>
 
-            <div class="accomplishment-type">
-                <span class="accomplishment-type-symbol">
-                    <img class="src" src="/static/certificates/images/ico-${course_mode_class}.png" alt="Image for course mode of type ${course_mode_class}">
-                </span>
-
-                <span class="accomplishment-type-label hd-3">${document_title}</span>
+            <!-- Left side -->
+            <div class="left">
+              <h1>Certificat de absolvire</h1>
+              <p>Se acordă acest certificat lui</p>
+              <div class="line">
+                <span class="line-text">${accomplishment_copy_name}</span>
+              </div>
+              <p>pentru finalizarea cursului</p>
+              <div class="line">
+                <span class="line-text"
+                  >${accomplishment_copy_course_name}</span
+                >
+              </div>
+              <p>susținut de lectorul</p>
+              <div class="line">
+                <span class="line-text">${accomplishment_copy_course_org}</span>
+              </div>
             </div>
 
-            <div class="wrapper-statement-and-signatories">
-                <div class="accomplishment-statement">
-                    <p class="accomplishment-statement-lead">
-                        <strong class="accomplishment-recipient hd-1 emphasized">${accomplishment_copy_name}</strong>
-                        <span class="accomplishment-summary copy copy-lead">${accomplishment_copy_description_full}</span>
+            <!-- Right side -->
+            <div class="right">
+              <!-- Logo -->
+              <div class="logo">
+                <img src="${logo_src}" alt="${platform_name}" />
+              </div>
 
-                        <span class="accomplishment-course hd-1 emphasized">
-                            <span class="accomplishment-course-org">${accomplishment_copy_course_org}  </span>
-                            <span class="accomplishment-course-number">${course_number}</span>:
-                            <span class="accomplishment-course-name">${accomplishment_copy_course_name}</span>
-                        </span>
-                    </p>
-
-                    <p class="accomplishment-statement-detail copy copy-lead">${accomplishment_copy_course_description}</p>
-                </div>
-
-                % if mode != 'base':
-                <div class="accomplishment-signatories">
-                    <h3 class="accomplishment-signatories-title sr-only">${_("Noted by")}</h3>
-
-                    <div class="wrapper-signatories">
-                        <div class="list-signatories">
-                            % if certificate_data:
-                                % for signatory in certificate_data.get('signatories', []):
-                                    % if signatory.get('signature_image_path'):
-                                        <div class="signatory">
-                                            <img class="signatory-signature" src="${static.url(signatory['signature_image_path'])}" alt="${signatory['name']}">
-
-                                            <h4 class="signatory-name hd-5">${signatory['name']}</h4>
-                                            <p class="signatory-credentials copy copy-micro">
-                                                <span class="role">${signatory['title']}</span>
-                                                <span class="organization">${signatory['organization']}</span>
-                                            </p>
-                                        </div>
-                                    % endif
-                                % endfor
-                            % endif
-                        </div>
-                    </div>
-                </div>
+              <!-- Signatures -->
+              <div class="signatures">
+                % if certificate_data: 
+                    % for signatory in certificate_data.get('signatories', []): 
+                        % if signatory.get('signature_image_path'):
+                            <div class="sig">
+                                <div class="sig-line">
+                                    <img
+                                    src="${static.url(signatory['signature_image_path'])}"
+                                    alt="${signatory['name']}"
+                                    class="signature-img"
+                                    />
+                                </div>
+                                <p>${signatory['name']} - ${signatory['title']}</p>
+                            </div>
+                        % endif 
+                    % endfor 
                 % endif
+              </div>
+
+              <div class="right-footer">
+                <div class="right-footer-left">
+                  <div class="badge"></div>
+                </div>
+                <div class="right-footer-right">
+                  <div class="details">
+                    <p>${certificate_date_issued}</p>
+                    <p>CERTIFICAT VERIFICAT</p>
+                    <p>${certificate_id_number}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div class="accomplishment-orgs">
-                <h3 class="accomplishment-orgs-title sr-only">${_("Supported by the following organizations")}</h3>
-
-                <ul class="wrapper-orgs list-orgs">
-                    <li class="wrapper-organization">
-                        <div class="organization organization-edX">
-                            <img class="organization-logo" src="${logo_src}" alt="${platform_name}">
-                        </div>
-                    </li>
-
-                    % if organization_logo:
-                    <li class="wrapper-organization">
-                        <div class="organization">
-                            <img class="organization-logo" src="${organization_logo.url}" alt="${platform_name}">
-                        </div>
-                    </li>
-                    % endif
-                </ul>
-            </div>
+          </div>
         </div>
-    </div>
-
-    <div class="wrapper-accomplishment-metadata">
+      </div>
+      <div class="wrapper-accomplishment-metadata">
         <div class="accomplishment-metadata">
             <h2 class="accomplishment-metadata-title hd-6">${accomplishment_copy_more_about}</h2>
 
@@ -115,5 +102,182 @@ course_mode_class = course_mode if course_mode else ''
             </div>
         </div>
     </div>
-
 </main>
+
+<style>
+  .certificate {
+    position: relative;
+    width: 1000px;
+    height: 600px;
+    margin: 40px auto;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 10px solid #3367cc;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #333;
+    overflow: hidden;
+  }
+
+  .watermark {
+    position: absolute;
+    background-image: url("https://finlearn.ro/wp-content/uploads/2025/06/background.png");
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .left {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 0px;
+  }
+  .left h1 {
+    margin: 0;
+    font-size: 36px;
+    color: #062c63;
+  }
+  .left p {
+    margin: 0;
+    font-size: 18px;
+  }
+  .line {
+    border-bottom: 2px solid #062c63;
+    width: 100%;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    padding-bottom: 5px;
+    min-height: 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: start;
+  }
+
+  .line-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #062c63;
+    background: #fff;
+    position: relative;
+    z-index: 2;
+  }
+
+  .right {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+    gap: 20px;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    gap: 10px;
+  }
+
+  .logo img {
+    max-width: 150px;
+    height: auto;
+  }
+
+  /* signatures flex */
+  .signatures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0px 0px 0 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sig {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 140px;
+    padding: 5px;
+  }
+  .sig-line {
+    width: 150px;
+    height: 100px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #062c63;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .signature-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .sig p {
+    margin: 0;
+    font-size: 11px;
+    color: #062c63;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  /* issue details */
+  .details {
+    text-align: center;
+  }
+  .details p {
+    margin: 8px 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #062c63;
+  }
+  .details p:first-child {
+    font-size: 12px;
+    font-weight: 600;
+    color: #062c63;
+    margin-bottom: 4px;
+  }
+
+  .right-footer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .right-footer-left {
+    position: relative;
+  }
+
+  .badge {
+    background-image: url("https://finlearn.ro/wp-content/uploads/2025/06/badge.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 88px;
+    height: 130px;
+    align-self: center;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    top: -80px;
+  }
+</style>
