@@ -8,7 +8,7 @@ course_mode_class = course_mode if course_mode else ''
 <main class="accomplishment accomplishment-main">
       <div class="wrapper-accomplishment-rendering">
         <div class="accomplishment-rendering">
-          <div class="certificate">
+          <div class="certificate-finlearn">
             <!-- Watermark -->
             <div class="watermark"></div>
 
@@ -25,7 +25,7 @@ course_mode_class = course_mode if course_mode else ''
                   >${accomplishment_copy_course_name}</span
                 >
               </div>
-              <p>susținut de lectorul</p>
+              <p>susținut de</p>
               <div class="line">
                 <span class="line-text">${accomplishment_copy_course_org}</span>
               </div>
@@ -105,7 +105,7 @@ course_mode_class = course_mode if course_mode else ''
 </main>
 
 <style>
-  .certificate {
+  .certificate-finlearn {
     position: relative;
     width: 1000px;
     height: 600px;
@@ -118,7 +118,6 @@ course_mode_class = course_mode if course_mode else ''
     font-family: Arial, sans-serif;
     background: #fff;
     color: #333;
-    overflow: hidden;
   }
 
   .watermark {
